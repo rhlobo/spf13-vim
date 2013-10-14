@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
-############################  SETUP PARAMETERS
-app_name='spf13-vim'
-git_uri='https://github.com/spf13/spf13-vim.git'
-git_branch='3.0'
-debug_mode='0'
-fork_maintainer='0'
 
-############################  BASIC SETUP TOOLS
+
+## SETUP PARAMETERS ###########################################################
+app_name='vim'
+git_uri='https://github.com/rhlobo/vimdev.git'
+git_branch='master'
+debug_mode='1'
+fork_maintainer='0'
+endpath="$HOME/.$app_name"
+
+
+## BASIC SETUP TOOLS ##########################################################
+
 msg() {
     printf '%b\n' "$1" >&2
 }
@@ -38,7 +43,9 @@ program_exists() {
     fi
 }
 
-############################ SETUP FUNCTIONS
+
+## SETUP FUNCTIONS ############################################################
+
 lnif() {
     if [ -e "$1" ]; then
         ln -sf "$1" "$2"
@@ -63,7 +70,7 @@ upgrade_repo() {
       msg "trying to update $1"
 
       if [ "$1" = "$app_name" ]; then
-          cd "$HOME/.$app_name-3" &&
+          cd "${endpath}" &&
           git pull origin "$git_branch"
       fi
 
@@ -79,7 +86,6 @@ upgrade_repo() {
 
 clone_repo() {
     program_exists "git" "Sorry, we cannot continue without GIT, please install it first."
-    endpath="$HOME/.$app_name-3"
 
     if [ ! -e "$endpath/.git" ]; then
         git clone --recursive -b "$git_branch" "$git_uri" "$endpath"
@@ -103,12 +109,6 @@ clone_vundle() {
 }
 
 create_symlinks() {
-    endpath="$HOME/.$app_name-3"
-
-    if [ ! -d "$endpath/.vim/bundle" ]; then
-        mkdir -p "$endpath/.vim/bundle"
-    fi
-
     lnif "$endpath/.vimrc"              "$HOME/.vimrc"
     lnif "$endpath/.vimrc.bundles"      "$HOME/.vimrc.bundles"
     lnif "$endpath/.vimrc.before"       "$HOME/.vimrc.before"
@@ -131,6 +131,10 @@ create_symlinks() {
 
     if [ -e "$endpath/.vimrc.before.fork" ]; then
         ln -sf "$endpath/.vimrc.before.fork" "$HOME/.vimrc.before.fork"
+    fi
+
+    if [ ! -d "$endpath/.vim/bundle" ]; then
+        mkdir -p "$endpath/.vim/bundle"
     fi
 
     ret="$?"
@@ -165,4 +169,4 @@ clone_vundle    "Successfully cloned vundle"
 setup_vundle    "Now updating/installing plugins using Vundle"
 
 msg             "\nThanks for installing $app_name."
-msg             "© `date +%Y` http://vim.spf13.com/"
+msg             "© `date +%Y` http://github.com/rhlobo/vimdev"
