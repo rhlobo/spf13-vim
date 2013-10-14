@@ -2,7 +2,7 @@
 
 
 ## SETUP PARAMETERS ###########################################################
-app_name='vim'
+app_name='vimdev'
 git_uri='https://github.com/rhlobo/vimdev.git'
 git_branch='master'
 debug_mode='1'
