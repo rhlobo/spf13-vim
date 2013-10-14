@@ -136,7 +136,7 @@
     "    let g:solarized_visibility="normal"
     "    color solarized             " Load a colorscheme
     "endif
-    g:molokai_original = 1
+    let g:molokai_original = 1
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
