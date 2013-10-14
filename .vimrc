@@ -1,18 +1,13 @@
 " Modeline and Notes {
 " vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
 "
-"                    __ _ _____              _
-"         ___ _ __  / _/ |___ /      __   __(_)_ __ ___
-"        / __| '_ \| |_| | |_ \ _____\ \ / /| | '_ ` _ \
-"        \__ \ |_) |  _| |___) |_____|\ V / | | | | | | |
-"        |___/ .__/|_| |_|____/        \_/  |_|_| |_| |_|
-"            |_|
+"   This is the personal .vimrc file of Roberto Lobo,
+"   based on Steve Francia's spf13-vim project.
 "
-"   This is the personal .vimrc file of Steve Francia.
 "   While much of it is beneficial for general use, I would
 "   recommend picking out the parts you want and understand.
 "
-"   You can find me at http://spf13.com
+"   You can find me at https://github.com/rhlobo/vimdev
 " }
 
 " Use before config {
@@ -75,8 +70,8 @@
     " Most prefer to automatically switch to the current file directory when
     " a new buffer is opened; to prevent this behavior, add the following to
     " your .vimrc.before.local file:
-    "   let g:spf13_no_autochdir = 1
-    if !exists('g:spf13_no_autochdir')
+    "   let g:vimdev_no_autochdir = 1
+    if !exists('g:vimdev_no_autochdir')
         autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
         " Always switch to the current file directory
     endif
@@ -96,8 +91,8 @@
     " http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
     " Restore cursor to file position in previous editing session
     " To disable this, add the following to your .vimrc.before.local file:
-    "   let g:spf13_no_restore_cursor = 1
-    if !exists('g:spf13_no_restore_cursor')
+    "   let g:vimdev_no_restore_cursor = 1
+    if !exists('g:vimdev_no_restore_cursor')
         function! ResCur()
             if line("'\"") <= line("$")
                 normal! g`"
@@ -120,8 +115,8 @@
         endif
 
         " To disable views add the following to your .vimrc.before.local file:
-        "   let g:spf13_no_views = 1
-        if !exists('g:spf13_no_views')
+        "   let g:vimdev_no_views = 1
+        if !exists('g:vimdev_no_views')
             " Add exclusions to mkview and loadview
             " eg: *.*, svn-commit.tmp
             let g:skipview_files = [
@@ -210,8 +205,8 @@
     " Remove trailing whitespaces and ^M chars
     " To disable the stripping of whitespace, add the following to your
     " .vimrc.before.local file:
-    "   let g:spf13_keep_trailing_whitespace = 1
-    autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
+    "   let g:vimdev_keep_trailing_whitespace = 1
+    autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> if !exists('g:vimdev_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
@@ -231,19 +226,19 @@
     " The default leader is '\', but many people prefer ',' as it's in a standard
     " location. To override this behavior and set it back to '\' (or any other
     " character) add the following to your .vimrc.before.local file:
-    "   let g:spf13_leader='\'
-    if !exists('g:spf13_leader')
+    "   let g:vimdev_leader='\'
+    if !exists('g:vimdev_leader')
         let mapleader = ','
     else
-        let mapleader=g:spf13_leader
+        let mapleader=g:vimdev_leader
     endif
 
     " Easier moving in tabs and windows
     " The lines conflict with the default digraph mapping of <C-K>
     " If you prefer that functionality, add the following to your
     " .vimrc.before.local file:
-    "   let g:spf13_no_easyWindows = 1
-    if !exists('g:spf13_no_easyWindows')
+    "   let g:vimdev_no_easyWindows = 1
+    if !exists('g:vimdev_no_easyWindows')
         map <C-J> <C-W>j<C-W>_
         map <C-K> <C-W>k<C-W>_
         map <C-L> <C-W>l<C-W>_
@@ -258,14 +253,14 @@
     " bottom of the screen
     " If you prefer that functionality, add the following to your
     " .vimrc.before.local file:
-    "   let g:spf13_no_fastTabs = 1
-    if !exists('g:spf13_no_fastTabs')
+    "   let g:vimdev_no_fastTabs = 1
+    if !exists('g:vimdev_no_fastTabs')
         map <S-H> gT
         map <S-L> gt
     endif
 
     " Stupid shift key fixes
-    if !exists('g:spf13_no_keyfixes')
+    if !exists('g:vimdev_no_keyfixes')
         if has("user_commands")
             command! -bang -nargs=* -complete=file E e<bang> <args>
             command! -bang -nargs=* -complete=file W w<bang> <args>
@@ -299,8 +294,8 @@
     " Most prefer to toggle search highlighting rather than clear the current
     " search results. To clear search highlighting rather than toggle it on
     " and off, add the following to your .vimrc.before.local file:
-    "   let g:spf13_clear_search_highlight = 1
-    if exists('g:spf13_clear_search_highlight')
+    "   let g:vimdev_clear_search_highlight = 1
+    if exists('g:vimdev_clear_search_highlight')
         nmap <silent> <leader>/ :nohlsearch<CR>
     else
         nmap <silent> <leader>/ :set invhlsearch<CR>
@@ -529,7 +524,7 @@
     "}
 
     " neocomplete {
-        if count(g:spf13_bundle_groups, 'neocomplete')
+        if count(g:vimdev_bundle_groups, 'neocomplete')
             let g:acp_enableAtStartup = 0
             let g:neocomplete#enable_at_startup = 1
             let g:neocomplete#enable_smart_case = 1
@@ -560,8 +555,8 @@
                 " These two lines conflict with the default digraph mapping of <C-K>
                 " If you prefer that functionality, add the following to your
                 " .vimrc.before.local file:
-                "   let g:spf13_no_neosnippet_expand = 1
-                if !exists('g:spf13_no_neosnippet_expand')
+                "   let g:vimdev_no_neosnippet_expand = 1
+                if !exists('g:vimdev_no_neosnippet_expand')
                     imap <C-k> <Plug>(neosnippet_expand_or_jump)
                     smap <C-k> <Plug>(neosnippet_expand_or_jump)
                 endif
@@ -629,7 +624,7 @@
     " }
 
     " neocomplcache {
-        if count(g:spf13_bundle_groups, 'neocomplcache')
+        if count(g:vimdev_bundle_groups, 'neocomplcache')
             let g:acp_enableAtStartup = 0
             let g:neocomplcache_enable_at_startup = 1
             let g:neocomplcache_enable_camel_case_completion = 1
@@ -662,8 +657,8 @@
                 " These two lines conflict with the default digraph mapping of <C-K>
                 " If you prefer that functionality, add the following to your
                 " .vimrc.before.local file:
-                "   let g:spf13_no_neosnippet_expand = 1
-                if !exists('g:spf13_no_neosnippet_expand')
+                "   let g:vimdev_no_neosnippet_expand = 1
+                if !exists('g:vimdev_no_neosnippet_expand')
                     imap <C-k> <Plug>(neosnippet_expand_or_jump)
                     smap <C-k> <Plug>(neosnippet_expand_or_jump)
                 endif
@@ -737,7 +732,7 @@
     " }
 
     " indent_guides {
-        if !exists('g:spf13_no_indent_guides_autocolor')
+        if !exists('g:vimdev_no_indent_guides_autocolor')
             let g:indent_guides_auto_colors = 1
         else
             " For some colorschemes, autocolor will not work (eg: 'desert', 'ir_black')
@@ -825,10 +820,10 @@
         " To specify a different directory in which to place the vimbackup,
         " vimviews, vimundo, and vimswap files/directories, add the following to
         " your .vimrc.before.local file:
-        "   let g:spf13_consolidated_directory = <full path to desired directory>
-        "   eg: let g:spf13_consolidated_directory = $HOME . '/.vim/'
-        if exists('g:spf13_consolidated_directory')
-            let common_dir = g:spf13_consolidated_directory . prefix
+        "   let g:vimdev_consolidated_directory = <full path to desired directory>
+        "   eg: let g:vimdev_consolidated_directory = $HOME . '/.vim/'
+        if exists('g:vimdev_consolidated_directory')
+            let common_dir = g:vimdev_consolidated_directory . prefix
         else
             let common_dir = parent . '/.' . prefix
         endif
