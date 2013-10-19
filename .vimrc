@@ -21,7 +21,7 @@
     " Basics {
         set nocompatible        " Must be first line
         if !(has('win16') || has('win32') || has('win64'))
-            set shell=/bin/sh
+            set shell=$SHELL
         endif
     " }
 
