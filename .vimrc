@@ -207,7 +207,7 @@
     set splitright                  " Puts new vsplit windows to the right of the current
     set splitbelow                  " Puts new split windows to the bottom of the current
     "set matchpairs+=<:>             " Match, to be used with %
-    set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+    set pastetoggle=<F2>            " pastetoggle (sane indentation on pastes)
     "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
     " Remove trailing whitespaces and ^M chars
     " To disable the stripping of whitespace, add the following to your
@@ -823,7 +823,7 @@
     " indent_guides {
         let g:indent_guides_start_level = 2
         let g:indent_guides_guide_size = 1
-        let g:indent_guides_enable_on_vim_startup = 1
+        let g:indent_guides_enable_on_vim_startup = 0
     " }
 
     " vim-airline {
