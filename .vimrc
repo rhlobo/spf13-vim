@@ -136,7 +136,7 @@
     "    let g:solarized_visibility="normal"
     "    color solarized             " Load a colorscheme
     "endif
-    let g:molokai_original = 1
+    let g:molokai_original = 0
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
@@ -183,7 +183,7 @@
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set scrolloff=3                 " Minimum lines to keep above and below cursor
-    set foldenable                  " Auto fold code
+    "set foldenable                  " Auto fold code
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
