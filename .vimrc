@@ -135,16 +135,7 @@
 
 " Vim UI {
 
-    "if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-    "    let g:solarized_termcolors=256
-    "    let g:solarized_termtrans=1
-    "    let g:solarized_contrast="normal"
-    "    let g:solarized_visibility="normal"
-    "    color solarized             " Load a colorscheme
-    "endif
-    let g:molokai_original = 0
-    colorscheme hybrid
-    "Try also: codeschool, hybrid, molokai, peaksea, pychimp, wombat256, wombat256mod
+    " UI Configs
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
@@ -989,4 +980,13 @@
             source ~/.gvimrc.local
         endif
     endif
+" }
+
+
+" Vim color scheme {
+    " Set a colorscheme
+    let g:molokai_original = 0
+    colorscheme hybrid
+    "Try one of these:
+    "codeschool, hybrid, molokai, peaksea, pychimp, wombat256, wombat256mod
 " }
