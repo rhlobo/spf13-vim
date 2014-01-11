@@ -144,6 +144,19 @@
     "endif
     let g:molokai_original = 0
     colorscheme molokai
+    "Try one of these:
+    "badwolf
+    "codeschool
+    "github
+    "grb256
+    "guardian
+    "hybrid
+    "molokai
+    "peaksea
+    "pychimp
+    "wombat
+    "wombat256
+    "wombat256mod
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
