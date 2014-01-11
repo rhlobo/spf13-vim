@@ -143,6 +143,7 @@
     "    color solarized             " Load a colorscheme
     "endif
     let g:molokai_original = 0
+    colorscheme molokai
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
