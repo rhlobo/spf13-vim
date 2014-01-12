@@ -182,8 +182,7 @@
     set scrolloff=3                 " Minimum lines to keep above and below cursor
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
-    "set foldenable                  " Auto fold code
-    set foldlevel=9
+    set foldenable                  " Auto fold code
 " }
 
 " Formatting {
@@ -813,7 +812,7 @@
 
     " indent_guides {
         let g:indent_guides_start_level = 2
-        let g:indent_guides_guide_size = 1
+        let g:indent_guides_guide_size = 4
         let g:indent_guides_enable_on_vim_startup = 0
     " }
 
@@ -983,10 +982,14 @@
 " }
 
 
-" Vim color scheme {
+" Color scheme {
     " Set a colorscheme
     let g:molokai_original = 0
-    colorscheme hybrid
-    "Try one of these:
-    "codeschool, hybrid, molokai, peaksea, pychimp, wombat256, wombat256mod
+    colorscheme hybrid "Try one of these: codeschool, hybrid, molokai, peaksea, pychimp, wombat256, wombat256mod
+
+    let g:indent_guides_auto_colors = 1
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=233
+
+    set foldlevel=9
 " }
