@@ -486,7 +486,17 @@
     " }
 
     " PyMode {
-        " Rope
+        " Keys:
+        " K     Show python docs
+        " g     Rope goto definition
+        " d     Rope show documentation
+        " f     Rope find occurrences
+        " b     Set, unset breakpoint (g:pymode_breakpoint enabled)
+        " [[    Jump on previous class or function (normal, visual, operator modes)
+        " ]]    Jump on next class or function (normal, visual, operator modes)
+        " [M    Jump on previous class or method (normal, visual, operator modes)
+        " ]M    Jump on next class or method (normal, visual, operator modes)
+
         let g:pymode_rope = 0
 
         " Documentation
