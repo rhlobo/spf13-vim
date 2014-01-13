@@ -87,7 +87,7 @@
     set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
     set virtualedit=onemore             " Allow for cursor beyond last character
     set history=1000                    " Store a ton of history (default is 20)
-    set spell                           " Spell checking on
+    "set spell                           " Spell checking on
     set hidden                          " Allow buffer switching without saving
 
     " Instead of reverting the cursor to the last position in the buffer, we
@@ -984,12 +984,13 @@
 
 " Color scheme {
     " Set a colorscheme
-    let g:molokai_original = 0
     colorscheme hybrid "Try one of these: codeschool, hybrid, molokai, peaksea, pychimp, wombat256, wombat256mod
 
     let g:indent_guides_auto_colors = 1
+    let g:indent_guides_enable_on_vim_startup = 1
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=233
 
     set foldlevel=9
 " }
+
