@@ -983,8 +983,8 @@
 
 
 " Color scheme {
-    " Set a colorscheme
-    colorscheme hybrid "Try one of these: codeschool, hybrid, molokai, peaksea, pychimp, wombat256, wombat256mod
+    " Set a colorscheme (codeschool, hybrid, inkpot, molokai, peaksea, pychimp, tir_black, wombat256, wombat256mod)
+    colorscheme hybrid
 
     let g:indent_guides_auto_colors = 1
     let g:indent_guides_enable_on_vim_startup = 1
