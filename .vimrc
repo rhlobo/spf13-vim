@@ -87,7 +87,7 @@
     set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
     set virtualedit=onemore             " Allow for cursor beyond last character
     set history=1000                    " Store a ton of history (default is 20)
-    "set spell                           " Spell checking on
+    set spell                           " Spell checking on
     set hidden                          " Allow buffer switching without saving
 
     " Instead of reverting the cursor to the last position in the buffer, we
@@ -992,5 +992,6 @@
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=233
 
     set foldlevel=9
+    set nospell
 " }
 
