@@ -985,6 +985,7 @@
 " Color scheme {
     " Set a colorscheme
     colorscheme hybrid "Try one of these: codeschool, hybrid, molokai, peaksea, pychimp, wombat256, wombat256mod
+    let g:airline_theme = 'wombat'
 
     let g:indent_guides_auto_colors = 1
     let g:indent_guides_enable_on_vim_startup = 1
