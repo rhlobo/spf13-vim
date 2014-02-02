@@ -102,6 +102,7 @@
 
     " General {
         if count(g:spf13_bundle_groups, 'general')
+            Bundle 'bronson/vim-toggle-wrap'
             Bundle 'scrooloose/nerdtree'
             Bundle 'altercation/vim-colors-solarized'
             Bundle 'rhlobo/vim-colorschemes'
