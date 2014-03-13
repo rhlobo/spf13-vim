@@ -637,6 +637,20 @@
             " When enabled, there can be too much visual noise
             " especially when splits are used.
             set completeopt-=preview
+
+            " Enables auto closing of the preview window when 
+            " the user accepts the offered completion string
+            let g:ycm_autoclose_preview_window_after_completion=1
+
+            " Sets go to definition / declaration shortcut
+            nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+            " Number of chars needed so the dial pops up 
+            " automatically... 
+            let g:ycm_min_num_of_chars_for_completion = 99
+
+            let g:ycm_error_symbol = '>>'
+            let g:ycm_warning_symbol = '->'
         endif
     " }
 
