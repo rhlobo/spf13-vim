@@ -1,18 +1,13 @@
 " Modeline and Notes {
 " vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
 "
-"                    __ _ _____              _
-"         ___ _ __  / _/ |___ /      __   __(_)_ __ ___
-"        / __| '_ \| |_| | |_ \ _____\ \ / /| | '_ ` _ \
-"        \__ \ |_) |  _| |___) |_____|\ V / | | | | | | |
-"        |___/ .__/|_| |_|____/        \_/  |_|_| |_| |_|
-"            |_|
+"   This is the personal .vimrc file of Roberto Lobo,
+"   based on Steve Francia's spf13-vim project.
 "
-"   This is the personal .vimrc file of Steve Francia.
 "   While much of it is beneficial for general use, I would
 "   recommend picking out the parts you want and understand.
 "
-"   You can find me at http://spf13.com
+"   You can find me at https://github.com/rhlobo/vimdev
 " }
 
 " Environment {
@@ -32,7 +27,7 @@
     " Basics {
         set nocompatible        " Must be first line
         if !WINDOWS()
-            set shell=/bin/sh
+            set shell=$SHELL
         endif
     " }
 
@@ -61,6 +56,7 @@
 " General {
 
     set background=dark         " Assume a dark background
+    set t_Co=256
     " if !has('gui')
         "set term=$TERM          " Make arrow and other keys work
     " endif
@@ -140,13 +136,7 @@
 
 " Vim UI {
 
-    if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-        let g:solarized_termcolors=256
-        let g:solarized_termtrans=1
-        let g:solarized_contrast="normal"
-        let g:solarized_visibility="normal"
-        color solarized             " Load a colorscheme
-    endif
+    " UI Configs
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
@@ -191,10 +181,15 @@
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set scrolloff=3                 " Minimum lines to keep above and below cursor
-    set foldenable                  " Auto fold code
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+    set foldenable                  " Auto fold code
 
+    if exists('+colorcolumn')
+        set colorcolumn=80
+    else
+        au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+    endif
 " }
 
 " Formatting {
@@ -209,7 +204,7 @@
     set splitright                  " Puts new vsplit windows to the right of the current
     set splitbelow                  " Puts new split windows to the bottom of the current
     "set matchpairs+=<:>             " Match, to be used with %
-    set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+    set pastetoggle=<F2>            " pastetoggle (sane indentation on pastes)
     "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
     " Remove trailing whitespaces and ^M chars
     " To disable the stripping of whitespace, add the following to your
@@ -506,9 +501,70 @@
     " }
 
     " PyMode {
-        let g:pymode_lint_checker = "pyflakes"
+        " Keys:
+        " K     Show python docs
+        " g     Rope goto definition
+        " d     Rope show documentation
+        " f     Rope find occurrences
+        " b     Set, unset breakpoint (g:pymode_breakpoint enabled)
+        " [[    Jump on previous class or function (normal, visual, operator modes)
+        " ]]    Jump on next class or function (normal, visual, operator modes)
+        " [M    Jump on previous class or method (normal, visual, operator modes)
+        " ]M    Jump on next class or method (normal, visual, operator modes)
+
+        let g:pymode_rope = 0
+
+        " Documentation
+        let g:pymode_doc = 1
+        let g:pymode_doc_key = '<leader>pK'
+
+        " Linting
+        let g:pymode_lint = 1
+        let g:pymode_lint_checker = "pyflakes" " ,pep8
+        " Ignore some lint warnings (Eg "E501,W" 
+        " would ignore E501 and all W erros.
+        let g:pymode_lint_ignore = "E501"
+
+        " Place error signs
+        let g:pymode_lint_signs = 1
+        let g:pymode_lint_todo_symbol = 'WW'
+        let g:pymode_lint_comment_symbol = 'CC'
+        let g:pymode_lint_visual_symbol = 'RR'
+        let g:pymode_lint_error_symbol = 'EE'
+        let g:pymode_lint_info_symbol = 'II'
+        let g:pymode_lint_pyflakes_symbol = 'FF'
+
+        " Auto check on save
+        let g:pymode_lint_write = 1
+        let g:pymode_lint_on_write = 1
+
+        " Support virtualenv
+        let g:pymode_virtualenv = 1
+
+        " Enable breakpoints plugin
+        let g:pymode_breakpoint = 1
+        let g:pymode_breakpoint_key = '<leader>pb'
+
+        " syntax highlighting
+        let g:pymode_syntax = 1
+        let g:pymode_syntax_all = 1
+        let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+        let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+        " Don't autofold code
+        let g:pymode_folding = 0
+
+        " Running python code
+        let g:pymode_run = 1
+        let g:pymode_run_bind = '<leader>px'
+        let g:pymode_breakpoint = 1
+        let g:pymode_breakpoint_bind = '<leader>pb'
+
+        " Misc
         let g:pymode_utils_whitespaces = 0
         let g:pymode_options = 0
+        let g:pymode_trim_whitespaces = 1
+
     " }
 
     " ctrlp {
@@ -574,10 +630,27 @@
         nnoremap <silent> <leader>gr :Gread<CR>
         nnoremap <silent> <leader>gw :Gwrite<CR>
         nnoremap <silent> <leader>ge :Gedit<CR>
+        nnoremap <silent> <leader>gx :diffoff!<cr><c-w>h:bd<cr>
         " Mnemonic _i_nteractive
         nnoremap <silent> <leader>gi :Git add -p %<CR>
         nnoremap <silent> <leader>gg :SignifyToggle<CR>
     "}
+
+    " jedi-vim {
+        let g:jedi#auto_vim_configuration = 0
+        let g:jedi#use_splits_not_buffers = "left"
+        let g:jedi#popup_on_dot = 0
+        let g:jedi#popup_select_first = 0
+
+        let g:jedi#goto_assignments_command = "<leader>pa"
+        let g:jedi#goto_definitions_command = "<leader>pd"
+        let g:jedi#documentation_command = "<leader>pk"
+        let g:jedi#usages_command = "<leader>pu"
+        let g:jedi#completions_command = ""
+        let g:jedi#rename_command = "<leader>pr"
+        let g:jedi#show_call_signatures = "1"
+        let g:jedi#completions_enabled = 0
+    " }
 
     " YouCompleteMe {
         if count(g:spf13_bundle_groups, 'youcompleteme')
@@ -595,7 +668,8 @@
             autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
             autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
             autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-            autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+            " Trying to use jedi (through YCM) intead
+            " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
             autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
             autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
             autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
@@ -618,6 +692,20 @@
             " When enabled, there can be too much visual noise
             " especially when splits are used.
             set completeopt-=preview
+
+            " Enables auto closing of the preview window when 
+            " the user accepts the offered completion string
+            let g:ycm_autoclose_preview_window_after_completion=1
+
+            " Sets go to definition / declaration shortcut
+            " nnoremap <leader>pd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+            " Number of chars needed so the dial pops up 
+            " automatically... 
+            " let g:ycm_min_num_of_chars_for_completion = 99
+
+            let g:ycm_error_symbol = '>>'
+            let g:ycm_warning_symbol = '->'
         endif
     " }
 
@@ -835,8 +923,8 @@
 
     " indent_guides {
         let g:indent_guides_start_level = 2
-        let g:indent_guides_guide_size = 1
-        let g:indent_guides_enable_on_vim_startup = 1
+        let g:indent_guides_guide_size = 4
+        let g:indent_guides_enable_on_vim_startup = 0
     " }
 
     " vim-airline {
@@ -1003,3 +1091,19 @@
         endif
     endif
 " }
+
+
+" Color scheme {
+    " Set a colorscheme (codeschool, hybrid, inkpot, molokai, peaksea, pychimp, tir_black, wombat256, wombat256mod)
+    colorscheme hybrid
+    let g:airline_theme = 'wombat'
+
+    let g:indent_guides_auto_colors = 0
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=233
+
+    let g:indent_guides_enable_on_vim_startup = 1
+    set foldlevel=9
+    set nospell
+" }
+

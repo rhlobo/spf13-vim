@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 ############################  SETUP PARAMETERS
-app_name='spf13-vim'
-app_dir="$HOME/.spf13-vim-3"
-[ -z "$git_uri" ] && git_uri='https://github.com/spf13/spf13-vim.git'
-git_branch='3.0'
+app_name='vimdev'
+app_dir="$HOME/.$app_name"
+[ -z "$git_uri" ] && git_uri='https://github.com/rhlobo/vimdev.git'
+git_branch='master'
 debug_mode='0'
 fork_maintainer='0'
 [ -z "$VUNDLE_URI" ] && VUNDLE_URI="https://github.com/gmarik/vundle.git"
 
-############################  BASIC SETUP TOOLS
 msg() {
     printf '%b\n' "$1" >&2
 }
@@ -40,7 +39,9 @@ program_exists() {
     fi
 }
 
-############################ SETUP FUNCTIONS
+
+## SETUP FUNCTIONS ############################################################
+
 lnif() {
     if [ -e "$1" ]; then
         ln -sf "$1" "$2"
@@ -134,6 +135,10 @@ create_symlinks() {
         ln -sf "$endpath/.vimrc.before.fork" "$HOME/.vimrc.before.fork"
     fi
 
+    if [ ! -d "$endpath/.vim/bundle" ]; then
+        mkdir -p "$endpath/.vim/bundle"
+    fi
+
     ret="$?"
     success "$1"
     debug
@@ -166,4 +171,4 @@ clone_vundle    "Successfully cloned vundle"
 setup_vundle    "Now updating/installing plugins using Vundle"
 
 msg             "\nThanks for installing $app_name."
-msg             "© `date +%Y` http://vim.spf13.com/"
+msg             "© `date +%Y` http://github.com/rhlobo/vimdev"
