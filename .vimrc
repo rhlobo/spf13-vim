@@ -600,6 +600,22 @@
         nnoremap <silent> <leader>gg :SignifyToggle<CR>
     "}
     
+    " jedi-vim {
+        let g:jedi#auto_vim_configuration = 0
+        let g:jedi#use_splits_not_buffers = "left"
+        let g:jedi#popup_on_dot = 0
+        let g:jedi#popup_select_first = 0
+
+        let g:jedi#goto_assignments_command = "<leader>pa"
+        let g:jedi#goto_definitions_command = ""
+        let g:jedi#documentation_command = "<leader>pk"
+        let g:jedi#usages_command = "<leader>pu"
+        let g:jedi#completions_command = ""
+        let g:jedi#rename_command = "<leader>pr"
+        let g:jedi#show_call_signatures = "1"
+        let g:jedi#completions_enabled = 0
+    " }
+
     " YouCompleteMe {
         if count(g:spf13_bundle_groups, 'youcompleteme')
             let g:acp_enableAtStartup = 0

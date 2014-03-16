@@ -182,6 +182,7 @@
             Bundle 'python_match.vim'
             " Seems to be obsolete: trying to use jedi instead
             " Bundle 'pythoncomplete'
+            Bundle 'davidhalter/jedi-vim'
         endif
     " }
 
