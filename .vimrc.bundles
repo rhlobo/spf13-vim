@@ -162,6 +162,7 @@
         elseif count(g:spf13_bundle_groups, 'youcompleteme')
             Bundle 'Valloric/YouCompleteMe'
             Bundle 'SirVer/ultisnips'
+            Bundle 'honza/vim-snippets'
         elseif count(g:spf13_bundle_groups, 'neocomplcache')
             Bundle 'Shougo/neocomplcache'
             Bundle 'Shougo/neosnippet'
@@ -179,7 +180,8 @@
             Bundle 'klen/python-mode'
             Bundle 'python.vim'
             Bundle 'python_match.vim'
-            Bundle 'pythoncomplete'
+            " Seems to be obsolete: trying to use jedi instead
+            " Bundle 'pythoncomplete'
         endif
     " }
 

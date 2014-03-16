@@ -611,12 +611,13 @@
             let g:UltiSnipsExpandTrigger = '<C-j>'
             let g:UltiSnipsJumpForwardTrigger = '<C-j>'
             let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-            
+
             " Enable omni completion.
             autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
             autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
             autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-            autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+            " Trying to use jedi (through YCM) intead
+            " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
             autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
             autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
             autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
@@ -643,11 +644,11 @@
             let g:ycm_autoclose_preview_window_after_completion=1
 
             " Sets go to definition / declaration shortcut
-            nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+            nnoremap <leader>pd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
             " Number of chars needed so the dial pops up 
             " automatically... 
-            let g:ycm_min_num_of_chars_for_completion = 99
+            " let g:ycm_min_num_of_chars_for_completion = 99
 
             let g:ycm_error_symbol = '>>'
             let g:ycm_warning_symbol = '->'
