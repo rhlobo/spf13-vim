@@ -56,6 +56,7 @@
 " General {
 
     set background=dark         " Assume a dark background
+    set t_Co=256
     " if !has('gui')
         "set term=$TERM          " Make arrow and other keys work
     " endif
@@ -183,6 +184,12 @@
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
     set foldenable                  " Auto fold code
+
+    if exists('+colorcolumn')
+        set colorcolumn=80
+    else
+        au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+    endif
 " }
 
 " Formatting {
@@ -501,21 +508,34 @@
 
         " Documentation
         let g:pymode_doc = 1
-        let g:pymode_doc_key = 'K'
+        let g:pymode_doc_key = '<leader>pK'
 
         " Linting
         let g:pymode_lint = 1
         let g:pymode_lint_checker = "pyflakes" " ,pep8
+        " Ignore some lint warnings (Eg "E501,W" 
+        " would ignore E501 and all W erros.
+        let g:pymode_lint_ignore = "E501"
+
+        " Place error signs
+        let g:pymode_lint_signs = 1
+        let g:pymode_lint_todo_symbol = 'WW'
+        let g:pymode_lint_comment_symbol = 'CC'
+        let g:pymode_lint_visual_symbol = 'RR'
+        let g:pymode_lint_error_symbol = 'EE'
+        let g:pymode_lint_info_symbol = 'II'
+        let g:pymode_lint_pyflakes_symbol = 'FF'
 
         " Auto check on save
         let g:pymode_lint_write = 1
+        let g:pymode_lint_on_write = 1
 
         " Support virtualenv
         let g:pymode_virtualenv = 1
 
         " Enable breakpoints plugin
         let g:pymode_breakpoint = 1
-        let g:pymode_breakpoint_key = 'b'
+        let g:pymode_breakpoint_key = '<leader>pb'
 
         " syntax highlighting
         let g:pymode_syntax = 1
@@ -526,9 +546,17 @@
         " Don't autofold code
         let g:pymode_folding = 0
 
+        " Running python code
+        let g:pymode_run = 1
+        let g:pymode_run_bind = '<leader>px'
+        let g:pymode_breakpoint = 1
+        let g:pymode_breakpoint_bind = '<leader>pb'
+
         " Misc
         let g:pymode_utils_whitespaces = 0
         let g:pymode_options = 0
+        let g:pymode_trim_whitespaces = 1
+
     " }
 
     " ctrlp {
@@ -607,7 +635,7 @@
         let g:jedi#popup_select_first = 0
 
         let g:jedi#goto_assignments_command = "<leader>pa"
-        let g:jedi#goto_definitions_command = ""
+        let g:jedi#goto_definitions_command = "<leader>pd"
         let g:jedi#documentation_command = "<leader>pk"
         let g:jedi#usages_command = "<leader>pu"
         let g:jedi#completions_command = ""
@@ -660,7 +688,7 @@
             let g:ycm_autoclose_preview_window_after_completion=1
 
             " Sets go to definition / declaration shortcut
-            nnoremap <leader>pd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+            " nnoremap <leader>pd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
             " Number of chars needed so the dial pops up 
             " automatically... 
