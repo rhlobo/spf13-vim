@@ -56,7 +56,6 @@
 " General {
 
     set background=dark         " Assume a dark background
-    set t_Co=256
     " if !has('gui')
         "set term=$TERM          " Make arrow and other keys work
     " endif
@@ -185,11 +184,6 @@
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
     set foldenable                  " Auto fold code
 
-    if exists('+colorcolumn')
-        set colorcolumn=80
-    else
-        au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-    endif
 " }
 
 " Formatting {
@@ -1105,5 +1099,11 @@
     let g:indent_guides_enable_on_vim_startup = 1
     set foldlevel=9
     set nospell
+
+    if exists('+colorcolumn')
+        set colorcolumn=80
+    else
+        au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+    endif
 " }
 
