@@ -402,7 +402,7 @@
 
     " OmniComplete {
         " To disable omni complete, add the following to your .vimrc.before.local file:
-        "   let g:spf13_no_omni_complete = 1
+        let g:spf13_no_omni_complete = 1
         if !exists('g:spf13_no_omni_complete')
             if has("autocmd") && exists("+omnifunc")
                 autocmd Filetype *
@@ -496,17 +496,21 @@
 
     " PyMode {
         " Keys:
-        " K     Show python docs
-        " g     Rope goto definition
-        " d     Rope show documentation
-        " f     Rope find occurrences
-        " b     Set, unset breakpoint (g:pymode_breakpoint enabled)
+        " <leader>px    Execute python code
+        " <leader>pK    Show python docs
+        "? g     Rope goto definition
+        "? d     Rope show documentation
+        "? f     Rope find occurrences
+        " <leader>pb     Set, unset breakpoint (g:pymode_breakpoint enabled)
         " [[    Jump on previous class or function (normal, visual, operator modes)
         " ]]    Jump on next class or function (normal, visual, operator modes)
         " [M    Jump on previous class or method (normal, visual, operator modes)
         " ]M    Jump on next class or method (normal, visual, operator modes)
 
+        " Disable rope
         let g:pymode_rope = 0
+        let g:pymode_rope_completion = 0
+        let g:pymode_rope_autoimport = 0
 
         " Documentation
         let g:pymode_doc = 1
@@ -514,10 +518,12 @@
 
         " Linting
         let g:pymode_lint = 1
-        let g:pymode_lint_checker = "pyflakes" " ,pep8
+        let g:pymode_lint_checker = "pyflakes"
+        let g:pymode_lint_checkers = ["pyflakes", "pep8"]
         " Ignore some lint warnings (Eg "E501,W" 
         " would ignore E501 and all W erros.
         let g:pymode_lint_ignore = "E501"
+        let g:pymode_lint_sort = ['E', 'C', 'I', 'W']
 
         " Place error signs
         let g:pymode_lint_signs = 1
@@ -544,6 +550,10 @@
         let g:pymode_syntax_all = 1
         let g:pymode_syntax_indent_errors = g:pymode_syntax_all
         let g:pymode_syntax_space_errors = g:pymode_syntax_all
+        let g:pymode_syntax_string_formatting = g:pymode_syntax_all
+        let g:pymode_syntax_string_format = g:pymode_syntax_all
+        let g:pymode_syntax_string_templates = g:pymode_syntax_all
+        let g:pymode_syntax_doctests = g:pymode_syntax_all
 
         " Don't autofold code
         let g:pymode_folding = 0
@@ -635,15 +645,18 @@
         let g:jedi#use_splits_not_buffers = "left"
         let g:jedi#popup_on_dot = 0
         let g:jedi#popup_select_first = 0
+        let g:jedi#completions_enabled = 0
 
+        let g:jedi#auto_close_doc = 1
         let g:jedi#goto_assignments_command = "<leader>pa"
         let g:jedi#goto_definitions_command = "<leader>pd"
         let g:jedi#documentation_command = "<leader>pk"
         let g:jedi#usages_command = "<leader>pu"
-        let g:jedi#completions_command = ""
+        let g:jedi#completions_command = "<leader>pc"
         let g:jedi#rename_command = "<leader>pr"
+
+        call jedi#configure_call_signatures()
         let g:jedi#show_call_signatures = "1"
-        let g:jedi#completions_enabled = 0
     " }
 
     " YouCompleteMe {
@@ -689,7 +702,7 @@
 
             " Enables auto closing of the preview window when 
             " the user accepts the offered completion string
-            let g:ycm_autoclose_preview_window_after_completion=1
+            " let g:ycm_autoclose_preview_window_after_completion=1
 
             " Sets go to definition / declaration shortcut
             " nnoremap <leader>pd :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -869,7 +882,7 @@
             autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
             autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
             autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-            autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+            " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
             autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
             autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
             autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
