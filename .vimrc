@@ -961,11 +961,24 @@
 
     " GVIM- (here instead of .gvimrc)
     if has('gui_running')
-        set guioptions-=T           " Remove the toolbar
         set lines=40                " 40 lines of text instead of 24
+
+        " by default the bar is hidden, but if I want to display it 
+        " you can use F11 to toggle between the two modes
+        function! ToggleGUICruft()
+          if &guioptions=='i'
+            exec('set guioptions=imTrL')
+          else
+            exec('set guioptions=i')
+          endif
+        endfunction
+        map <F11> <Esc>:call ToggleGUICruft()<cr>
+        set guioptions=i
+
+
         if !exists("g:spf13_no_big_font")
             if LINUX() && has("gui_running")
-                set guifont=Andale\ Mono\ Regular\ 16,Menlo\ Regular\ 15,Consolas\ Regular\ 16,Courier\ New\ Regular\ 18
+                set guifont=Source\ Code\ Pro\ Medium\ for\ Powerline\ 12,Inconsolata\ for\ Powerline\ Medium\ 12,Ubuntu\ Mono\ Regular\ 12
             elseif OSX() && has("gui_running")
                 set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
             elseif WINDOWS() && has("gui_running")
