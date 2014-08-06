@@ -978,7 +978,7 @@
 
         if !exists("g:spf13_no_big_font")
             if LINUX() && has("gui_running")
-                set guifont=Source\ Code\ Pro\ Medium\ for\ Powerline\ 12,Inconsolata\ for\ Powerline\ Medium\ 12,Ubuntu\ Mono\ Regular\ 12
+                set guifont=Inconsolata\ for\ Powerline\ Medium\ 12,Ubuntu\ Mono\ Regular\ 12
             elseif OSX() && has("gui_running")
                 set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
             elseif WINDOWS() && has("gui_running")
