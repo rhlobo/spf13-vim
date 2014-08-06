@@ -624,6 +624,10 @@
         endif
     " }
 
+    " HaskellMode {
+        let g:haddock_browser = "/usr/bin/google-chrome"
+    " }
+
     " Fugitive {
         nnoremap <silent> <leader>gs :Gstatus<CR>
         nnoremap <silent> <leader>gd :Gdiff<CR>
