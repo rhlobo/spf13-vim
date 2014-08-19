@@ -1,7 +1,5 @@
 FIX HASKELL ERRORS
-    Errors when opening
     Can't save
-
 
 SUPPORT CLOSURE
     https://github.com/vim-scripts/VimClojure
@@ -9,13 +7,3 @@ SUPPORT CLOSURE
 SUPPORT GOLANG
 
 SUPPORT DART
-
-CONFIGURE MULTIPLE CURSORS
-    https://github.com/terryma/vim-multiple-cursor 
-
-INVESTIGATE
-    vim as python IDE
-        https://github.com/mbrochh/vim-as-a-python-ide
-        http://sontek.net/blog/detail/turning-vim-into-a-modern-python-ide 
-    ?
-        https://github.com/tristen/vim-sparkup
