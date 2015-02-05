@@ -133,6 +133,7 @@
             Bundle 'tpope/vim-abolish.git'
             Bundle 'osyo-manga/vim-over'
             Bundle 'rhlobo/vim-super-retab'
+            Bundle 'christoomey/vim-tmux-navigator'
         endif
     " }
 
