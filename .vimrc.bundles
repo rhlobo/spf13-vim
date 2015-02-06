@@ -106,6 +106,7 @@
             Bundle 'scrooloose/nerdtree'
             Bundle 'altercation/vim-colors-solarized'
             Bundle 'rhlobo/vim-colorschemes'
+            Bundle 'croaky/vim-colors-github'
             Bundle 'tpope/vim-surround'
             "Bundle 'spf13/vim-autoclose'
             Bundle 'kien/ctrlp.vim'
